@@ -1,11 +1,24 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import App from "../App";
 import AriaLabels from "../utils/AriaLabels";
 
-test("renders learn react link", async () => {
+test("renders list and detail", async () => {
   render(<App />);
-  const linkElement = await screen.findAllByLabelText(AriaLabels.pokeItem);
-  console.log(linkElement);
-  // expect(linkElement).toBeInTheDocument();
+
+  await waitFor(() => {
+    expect(
+      screen.getAllByLabelText(AriaLabels.pokeItem).length
+    ).toBeGreaterThan(0);
+  });
+
+  const items = screen.getAllByLabelText(AriaLabels.pokeItem);
+  expect(items.length).toBe(5);
+
+  const [firstPoke] = items;
+  fireEvent.click(firstPoke);
+
+  await waitFor(() => {
+    expect(screen.getByLabelText(AriaLabels.pokeDetail)).toBeInTheDocument();
+  });
 });

@@ -1,6 +1,7 @@
 import { Divider, makeStyles, Paper, Typography } from "@material-ui/core";
 import React, { useCallback } from "react";
 import useLang from "../hooks/useLang";
+import AriaLabels from "../utils/AriaLabels";
 import Ability from "./Ability";
 
 export interface UrlProps {
@@ -64,9 +65,12 @@ export default ({ detail }: Props) => {
     [classes]
   );
 
-  console.log(detail)
   return (
-    <Paper variant="outlined" className={classes.root}>
+    <Paper
+      variant="outlined"
+      className={classes.root}
+      aria-label={AriaLabels.pokeDetail}
+    >
       <figure>
         <img
           className={classes.images}
