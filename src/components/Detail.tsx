@@ -64,6 +64,7 @@ export default ({ detail }: Props) => {
     [classes]
   );
 
+  console.log(detail)
   return (
     <Paper variant="outlined" className={classes.root}>
       <figure>

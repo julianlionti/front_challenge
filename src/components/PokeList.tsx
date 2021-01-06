@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
 import React, { useState } from "react";
+import AriaLabels from "../utils/AriaLabels";
 
 export interface PokeProps {
   name: string;
@@ -26,11 +27,17 @@ export default ({ data, onSelect, total, onChangePage }: Props) => {
 
   return (
     <Paper>
-      <List aria-label="poke list">
+      <List aria-label={AriaLabels.pokeList}>
         {data?.map((poke) => {
           const { name, url } = poke;
           return (
-            <ListItem button divider key={url} onClick={() => onSelect(poke)}>
+            <ListItem
+              aria-label={AriaLabels.pokeItem}
+              button
+              divider
+              key={url}
+              onClick={() => onSelect(poke)}
+            >
               <ListItemText primary={name} />
             </ListItem>
           );
