@@ -7,32 +7,55 @@ import {
   Menu,
   MenuItem,
   IconButton,
-  Collapse,
+  useTheme,
+  useMediaQuery,
+  Fade,
+  Popper,
+  Paper,
+  ClickAwayListener,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import useLang from "../hooks/useLang";
-import { ArrowBack } from "@material-ui/icons";
+import { ArrowBack, Close, Airplay } from "@material-ui/icons";
 
 interface Props {
-  goBack?: boolean;
-  onBack?: () => void;
+  goBack: boolean;
+  onBack: () => void;
 }
 
 export default ({ goBack, onBack }: Props) => {
-  const { setLang, lang, availableLangs } = useLang();
+  const { setLang, lang, availableLangs, commons } = useLang();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>();
   const classes = useClasses();
+
+  const { breakpoints } = useTheme();
+  const isBig = useMediaQuery(breakpoints.up("sm"));
+  const [showDeveloper, setShowDeveloper] = useState<HTMLElement | null>(null);
 
   return (
     <AppBar position="static">
       <Toolbar>
-        <Collapse timeout="auto" in={goBack}>
-          <IconButton color={"inherit"} onClick={onBack}>
-            <ArrowBack />
+        <ClickAwayListener
+          onClickAway={() => {
+            setShowDeveloper(null);
+          }}
+        >
+          <IconButton
+            color={"inherit"}
+            onClick={({ currentTarget }) => {
+              if (!goBack) {
+                setShowDeveloper((e) => (e ? null : currentTarget));
+              } else {
+                onBack();
+              }
+            }}
+          >
+            {!goBack ? <Airplay /> : isBig ? <Close /> : <ArrowBack />}
           </IconButton>
-        </Collapse>
+        </ClickAwayListener>
+
         <Typography variant="h6" className={classes.title}>
-          Front Challenge
+          {commons.title[lang]}
         </Typography>
         <Button onClick={(e) => setAnchorEl(e.currentTarget)} color="inherit">
           {availableLangs.find((l) => l.id === lang)?.title}
@@ -56,10 +79,20 @@ export default ({ goBack, onBack }: Props) => {
           ))}
         </Menu>
       </Toolbar>
+      <Popper open={!!showDeveloper} anchorEl={showDeveloper} transition>
+        {({ TransitionProps }) => (
+          <Fade {...TransitionProps}>
+            <Paper className={classes.developer}>
+              Developed by Julián Lionti. ✌🏼
+            </Paper>
+          </Fade>
+        )}
+      </Popper>
     </AppBar>
   );
 };
 
 const useClasses = makeStyles((theme) => ({
   title: { flexGrow: 1 },
+  developer: { padding: theme.spacing(1) },
 }));

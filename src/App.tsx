@@ -1,11 +1,14 @@
-import { CssBaseline } from "@material-ui/core";
+import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
+import { red } from "@material-ui/core/colors";
 import React from "react";
 import Home from "./screens/Home";
 import { LangProvider } from "./utils/LangContext";
 
 export default () => (
   <LangProvider>
-    <CssBaseline />
-    <Home />
+    <ThemeProvider theme={createMuiTheme({ palette: { primary: red } })}>
+      <CssBaseline />
+      <Home />
+    </ThemeProvider>
   </LangProvider>
 );

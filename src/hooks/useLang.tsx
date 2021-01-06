@@ -12,6 +12,20 @@ const availableLangs: AvailableProps[] = [
   { id: "de", title: "Deutsche" },
 ];
 
+const commons = {
+  title: { es: "Desafío Front", en: "Front Challenge", de: "Herausforderung" },
+  description: { es: "Descripción", en: "Description", de: "Beschreibung" },
+  ability: { es: "Habilidades", en: "Abilities", de: "Kompetenzen" },
+  height: { es: "Altura", en: "Height", de: "Höhe" },
+  weight: { es: "Peso", en: "Weight", de: "Gewicht" },
+  experience: { es: "Experiencia", en: "Experience", de: "Erfahrung" },
+  total_moves: {
+    es: "Movimientos totales",
+    en: "Total moves",
+    de: "Gesamtbewegungen",
+  },
+};
+
 export default () => {
   const [translation, setTranslation] = useContext(LangContext);
 
@@ -23,5 +37,5 @@ export default () => {
     [setTranslation]
   );
 
-  return { setLang, lang: translation.lang, availableLangs };
+  return { setLang, lang: translation.lang, availableLangs, commons };
 };
