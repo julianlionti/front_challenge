@@ -42,8 +42,6 @@ export default () => {
   const isBig = useMediaQuery(breakpoints.up("sm"));
   const classes = useClasses({ isBig, detail });
 
-  console.log(pokeResponse, loading);
-
   return (
     <div>
       <Header goBack={!!detail} onBack={() => cleanDetail()} />
