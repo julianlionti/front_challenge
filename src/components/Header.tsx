@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import useLang from "../hooks/useLang";
-import { ArrowBack, Close, Airplay } from "@material-ui/icons";
+import { ArrowBack, Close, Airplay, GitHub } from "@material-ui/icons";
 
 interface Props {
   goBack: boolean;
@@ -84,6 +84,13 @@ export default ({ goBack, onBack }: Props) => {
           <Fade {...TransitionProps}>
             <Paper className={classes.developer}>
               Developed by Julián Lionti. ✌🏼
+              <IconButton
+                onClick={() =>
+                  window.open("https://github.com/julianlionti", "_blank")
+                }
+              >
+                <GitHub />
+              </IconButton>
             </Paper>
           </Fade>
         )}
