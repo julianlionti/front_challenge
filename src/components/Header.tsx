@@ -83,7 +83,7 @@ export default ({ goBack, onBack }: Props) => {
         {({ TransitionProps }) => (
           <Fade {...TransitionProps}>
             <Paper className={classes.developer}>
-              Developed by Julián Lionti. ✌🏼
+              {commons.developed[lang]}
               <IconButton
                 onClick={() =>
                   window.open("https://github.com/julianlionti", "_blank")

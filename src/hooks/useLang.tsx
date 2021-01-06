@@ -15,9 +15,9 @@ const availableLangs: AvailableProps[] = [
 const dev = "Julián Lionti";
 const commons = {
   developed: {
-    es: `Desarrollado por ${dev}`,
-    en: `Developed by ${dev}`,
-    de: `Entwickelt von ${dev}`,
+    es: `Desarrollado por ${dev} ✌🏼`,
+    en: `Developed by ${dev} ✌🏼`,
+    de: `Entwickelt von ${dev} ✌🏼`,
   },
   title: { es: "Desafío Front", en: "Front Challenge", de: "Herausforderung" },
   description: { es: "Descripción", en: "Description", de: "Beschreibung" },
